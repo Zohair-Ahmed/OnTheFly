@@ -17,6 +17,9 @@ const promptsFile = require('./data/prompts.json');
 const topicsFile = require('./data/topics.json');
 const axios = require('axios'); // Install axios for API requests: npm install axios
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Catch-all handler for React routing
 app.get('*', async (_, res) => {
   try {
