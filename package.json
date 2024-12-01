@@ -23,7 +23,8 @@
     "@pollinations/react": "^2.0.7",
     "axios": "^1.7.8",
     "cors": "^2.8.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
