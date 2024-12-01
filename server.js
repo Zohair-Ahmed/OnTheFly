@@ -6,13 +6,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(process.env.PORT || 5000);
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 const promptsFile = require('./data/prompts.json');
 const topicsFile = require('./data/topics.json');
 const axios = require('axios'); // Install axios for API requests: npm install axios
 
-app.get('/');
+// Catch-all handler for React routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.get('/api/prompt', async (_, res) => {
   try {
