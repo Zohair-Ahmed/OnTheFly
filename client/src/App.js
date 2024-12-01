@@ -1,34 +1,58 @@
 // client/src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Prompt from './Prompt';
+import Image from './Image';
 
 function App() {
-  const [content, setContent] = useState(null);
+  const [route, setRoute] = useState(window.location.pathname);
 
-  const fetchContent = async () => {
-    try {
-      const response = await fetch('http://localhost:5001/api/random');
-      const data = await response.json();
-      setContent(data);
-      console.log(data)
-    } catch (error) {
-      console.error("Failed to fetch content:", error);
-    }
+  useEffect(() => {
+    // Update the route when the browser's URL changes
+    const handlePopState = () => {
+      setRoute(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  const navigate = (path) => {
+    // Change the browser's URL without reloading the page
+    window.history.pushState({}, '', path);
+    setRoute(path);
   };
 
+  // Render components conditionally based on the current route
   return (
     <div className="App">
-      <h1>On The Fly</h1>
-      <h4>Tell us the best story you can using the topic, prompt and picture below!</h4>
-      <button onClick={fetchContent}>Generate Story Elements</button>
+      {/* <header>
+          <img className='headerImg' src={`${process.env.PUBLIC_URL}/images/header.jpeg`} alt="Header"/>
+      </header> */}
 
-      {content && (
-        <div>
-          <h2>Topic: {content.topic}</h2>
-          <h3>Prompt: {content.prompt}</h3>
-          <img src={content.image} alt="Random" />
+
+      {/* Header Section */}
+      <header className="hero-banner">
+        <div className='logos'>
+          <img className="irc-logo" src={`${process.env.PUBLIC_URL}/images/islamic-relief-canada-logo.webp`} alt="Islamic Relief Canada" />
+          <img className="sol-logo" src={`${process.env.PUBLIC_URL}/images/seeds-of-leadership-logo.png`} alt="Seeds of Leadership" />
         </div>
-      )}
+        <hr />
+        <img src={`${process.env.PUBLIC_URL}/images/header.jpeg`} alt="Seeds of Leadership" className="hero-image" />
+        <h1>On The Fly</h1>
+        <h4>Tell a story based off the random prompt and image below!</h4>
+        <nav className="nav-buttons">
+          <button onClick={() => navigate('/image')} className='nav-btn'>Image Generator</button>
+          <button onClick={() => navigate('/prompt')} className='nav-btn'>Prompt & Topic Generator</button>
+        </nav>
+      </header>
+
+      {route === '/image' && <Image />}
+      {route === '/prompt' && <Prompt />}
+      {route === '/' && <h1>Welcome! Select a page from the navigation above.</h1>}
     </div>
   );
 }

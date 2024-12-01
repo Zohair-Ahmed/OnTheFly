@@ -1,20 +1,77 @@
-/* client/src/App.css */
+/* client/src/App.css
+/* General Reset */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
 .App {
   text-align: center;
 }
 
+/* Hero Banner Section */
+.logos {
+  display: inline-block;
+}
+
+.irc-logo {
+  position: relative;
+  width: 5%;
+}
+
+.sol-logo {
+  position: relative;
+  width: 5%;
+  margin-left: 2%;
+}
+
+.hero-banner {
+  position: relative;
+  height: 100%;
+}
+
+.hero-image {
+  width: 70%; /* Full width of the container */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 300px; /* Restrict the height to your preferred maximum */
+  display: block; /* Ensure no extra space below the image */
+  margin: 0 auto; /* Center the image horizontally, if needed */
+}
+
 h1 {
-  color: #4a90e2;
+ color: #0b465e;
+ font-family: Arial, Helvetica, sans-serif;
+ font-weight: bolder;
+ font-size: 40px;
 }
 
-button {
+h4 {
+  font-weight: lighter;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0b465e;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.nav-btn {
+  margin: 5px;
   padding: 10px 20px;
-  font-size: 16px;
-  margin: 30px;
+  font-family: 'Arial', sans-serif;
+  color: #333333;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
 }
 
-img {
-  margin-top: 20px;
-  max-width: 100%;
-  height: auto;
+.nav-btn button:hover {
+  color: #357ac9;
+  text-decoration: underline;
 }
