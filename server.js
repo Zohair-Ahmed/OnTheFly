@@ -18,8 +18,16 @@ const topicsFile = require('./data/topics.json');
 const axios = require('axios'); // Install axios for API requests: npm install axios
 
 // Catch-all handler for React routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+app.get('*', async (_, res) => {
+  try {
+    const randomPrompt = promptsFile.prompts[Math.floor(Math.random() * promptsFile.prompts.length)];
+
+    res.json({
+      prompt: randomPrompt,
+    })
+  } catch (error) {
+    res.status(500).send("Error generating random content.");
+  }
 });
 
 app.get('/api/prompt', async (_, res) => {
